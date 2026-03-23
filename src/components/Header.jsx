@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import donkeyImage from '../assets/donkey.png';
 
 const navItems = [
-  { to: '/', label: 'Home1' },
+  { to: '/', label: 'Home' },
   { to: '/about', label: 'About' },
   { to: '/issues', label: 'Issues' },
   { to: '/get-involved', label: 'Get Involved' },
