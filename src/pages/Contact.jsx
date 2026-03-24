@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import emailjs from '@emailjs/browser';
 import { useSearchParams } from 'react-router-dom';
 
 const socialLinks = [
@@ -37,9 +39,23 @@ const socialLinks = [
   },
 ];
 
+const reasonOptions = ['Volunteer', 'Endorsement', 'Yard Sign', 'Email List', 'General Question'];
+const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+const toEmail = import.meta.env.VITE_CONTACT_TO_EMAIL || 'DarinMasriForPA@gmail.com';
+
 function SocialIcon({ children }) {
   return (
-    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      className="h-5 w-5"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       {children}
     </svg>
   );
@@ -48,7 +64,71 @@ function SocialIcon({ children }) {
 export default function Contact() {
   const [searchParams] = useSearchParams();
   const reason = searchParams.get('reason');
-  const selectedReason = reason === 'endorsement' ? 'Endorsement' : 'Volunteer';
+  const defaultReason = reason === 'endorsement' ? 'Endorsement' : 'Volunteer';
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    reason: defaultReason,
+    message: '',
+  });
+  const [status, setStatus] = useState({ type: '', message: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setFormData((current) => ({ ...current, [name]: value }));
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    if (!serviceId || !templateId || !publicKey) {
+      setStatus({
+        type: 'error',
+        message: 'Email service is not configured yet. Add the EmailJS environment values first.',
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+    setStatus({ type: '', message: '' });
+
+    try {
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          title: formData.reason,
+          name: formData.name,
+          mail: formData.email,
+          from_name: formData.name,
+          from_email: formData.email,
+          reason: formData.reason,
+          message: formData.message,
+          to_email: toEmail,
+        },
+        { publicKey }
+      );
+
+      setStatus({
+        type: 'success',
+        message: 'Message sent successfully. The campaign will receive it by email.',
+      });
+      setFormData({
+        name: '',
+        email: '',
+        reason: defaultReason,
+        message: '',
+      });
+    } catch (error) {
+      setStatus({
+        type: 'error',
+        message: 'Message could not be sent. Please try again or email the campaign directly.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
 
   return (
     <div className="section-padding">
@@ -74,7 +154,10 @@ export default function Contact() {
               <p className="text-sm font-semibold uppercase tracking-[0.24em] text-primary-700">
                 Phone
               </p>
-              <a href="tel:+18144497968" className="mt-2 block text-xl font-semibold text-primary-900">
+              <a
+                href="tel:+18144497968"
+                className="mt-2 block text-xl font-semibold text-primary-900"
+              >
                 +1 (814) 449-7968
               </a>
             </div>
@@ -114,13 +197,17 @@ export default function Contact() {
             general campaign questions.
           </p>
 
-          <form className="mt-8 space-y-6">
+          <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
             <div>
               <label className="mb-2 block text-sm font-semibold uppercase tracking-[0.16em] text-primary-900">
                 Name
               </label>
               <input
+                name="name"
                 type="text"
+                value={formData.name}
+                onChange={handleChange}
+                required
                 className="w-full rounded-2xl border border-primary-100 bg-primary-50/50 px-4 py-4 text-primary-900 outline-none transition focus:border-primary-500"
               />
             </div>
@@ -129,7 +216,11 @@ export default function Contact() {
                 Email
               </label>
               <input
+                name="email"
                 type="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
                 className="w-full rounded-2xl border border-primary-100 bg-primary-50/50 px-4 py-4 text-primary-900 outline-none transition focus:border-primary-500"
               />
             </div>
@@ -138,14 +229,14 @@ export default function Contact() {
                 Reason for contact
               </label>
               <select
-                defaultValue={selectedReason}
+                name="reason"
+                value={formData.reason}
+                onChange={handleChange}
                 className="w-full rounded-2xl border border-primary-100 bg-primary-50/50 px-4 py-4 text-primary-900 outline-none transition focus:border-primary-500"
               >
-                <option>Volunteer</option>
-                <option>Endorsement</option>
-                <option>Yard Sign</option>
-                <option>Email List</option>
-                <option>General Question</option>
+                {reasonOptions.map((option) => (
+                  <option key={option}>{option}</option>
+                ))}
               </select>
             </div>
             <div>
@@ -153,12 +244,29 @@ export default function Contact() {
                 Message
               </label>
               <textarea
+                name="message"
                 rows="6"
+                value={formData.message}
+                onChange={handleChange}
+                required
                 className="w-full rounded-2xl border border-primary-100 bg-primary-50/50 px-4 py-4 text-primary-900 outline-none transition focus:border-primary-500"
               />
             </div>
-            <button type="submit" className="btn-primary">
-              Send Message
+
+            {status.message && (
+              <p
+                className={`rounded-2xl border px-4 py-3 text-sm leading-6 ${
+                  status.type === 'success'
+                    ? 'border-primary-100 bg-primary-50 text-primary-900'
+                    : 'border-accent-100 bg-accent-100/60 text-primary-900'
+                }`}
+              >
+                {status.message}
+              </p>
+            )}
+
+            <button type="submit" disabled={isSubmitting} className="btn-primary disabled:cursor-not-allowed disabled:opacity-70">
+              {isSubmitting ? 'Sending...' : 'Send Message'}
             </button>
           </form>
         </section>
