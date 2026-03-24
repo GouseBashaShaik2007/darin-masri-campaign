@@ -3,7 +3,7 @@ import darinImage from '../assets/dahrin.jpeg';
 const imageCards = [
   {
     title: 'Campaign Portrait',
-    subtitle: 'Darin’s campaign image featured in the about section.',
+    subtitle: "Darin's campaign image featured in the about section.",
     accent: 'from-primary-900 via-primary-700 to-primary-500',
   },
   {
@@ -47,13 +47,13 @@ export default function About() {
               </p>
               <p className="mt-6 text-lg leading-8 text-neutral-600">
                 For over a decade, Darin has built and operated local businesses, creating jobs and
-                serving the Erie community. Through this experience, he has developed a deep
+                serving the Erie community. Through this experience, she has developed a deep
                 understanding of the economic challenges facing working families and small business
                 owners.
               </p>
               <p className="mt-6 text-lg leading-8 text-neutral-600">
                 Darin is running for State Committee to bring accountability, transparency, and
-                stronger grassroots representation to the Democratic Party. He believes the party
+                stronger grassroots representation to the Democratic Party. She believes the party
                 must be more responsive to its members and more effective in advocating for
                 policies that support working people.
               </p>
