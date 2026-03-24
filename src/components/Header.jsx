@@ -1,14 +1,13 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import donkeyImage from '../assets/donkey.png';
 
 const navItems = [
   { to: '/', label: 'Home' },
-  { to: '/about', label: 'About' },
+  { to: '/about', label: 'Meet Darin' },
   { to: '/issues', label: 'Issues' },
   { to: '/get-involved', label: 'Get Involved' },
-  { to: '/donate', label: 'Donate' },
-  { to: '/contact', label: 'Contact' },
+  { to: '/contact?reason=endorsement', label: 'Endorse' },
 ];
 
 export default function Header() {
@@ -45,14 +44,33 @@ export default function Header() {
 
         <nav className="hidden items-center gap-1 md:flex">
           {navItems.map((item) => (
-            <Link
+            <NavLink
               key={item.to}
               to={item.to}
-              className="rounded-full px-4 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-primary-900 hover:bg-primary-50 hover:text-primary-700"
+              end={item.to === '/'}
+              className={({ isActive }) =>
+                `rounded-full px-4 py-2 text-sm font-semibold uppercase tracking-[0.18em] transition ${
+                  isActive
+                    ? 'bg-primary-900 text-white'
+                    : 'text-primary-900 hover:bg-primary-50 hover:text-primary-700'
+                }`
+              }
             >
               {item.label}
-            </Link>
+            </NavLink>
           ))}
+          <NavLink
+            to="/donate"
+            className={({ isActive }) =>
+              `ml-2 rounded-full px-5 py-2.5 text-sm font-bold uppercase tracking-[0.2em] transition ${
+                isActive
+                  ? 'bg-accent-700 text-white shadow-lg shadow-accent-700/30'
+                  : 'bg-accent-600 text-white shadow-lg shadow-accent-700/20 hover:-translate-y-0.5 hover:bg-accent-700'
+              }`
+            }
+          >
+            Donate
+          </NavLink>
         </nav>
 
         <button
@@ -71,15 +89,33 @@ export default function Header() {
         <nav className="border-t border-primary-100 bg-white px-4 py-3 md:hidden">
           <div className="mx-auto flex max-w-7xl flex-col gap-2">
             {navItems.map((item) => (
-              <Link
+              <NavLink
                 key={item.to}
                 to={item.to}
-                className="rounded-2xl px-4 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-primary-900 hover:bg-primary-50"
+                end={item.to === '/'}
+                className={({ isActive }) =>
+                  `rounded-2xl px-4 py-3 text-sm font-semibold uppercase tracking-[0.16em] transition ${
+                    isActive
+                      ? 'bg-primary-900 text-white'
+                      : 'text-primary-900 hover:bg-primary-50'
+                  }`
+                }
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.label}
-              </Link>
+              </NavLink>
             ))}
+            <NavLink
+              to="/donate"
+              className={({ isActive }) =>
+                `rounded-2xl px-4 py-3 text-sm font-bold uppercase tracking-[0.18em] transition ${
+                  isActive ? 'bg-accent-700 text-white' : 'bg-accent-600 text-white hover:bg-accent-700'
+                }`
+              }
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Donate
+            </NavLink>
           </div>
         </nav>
       )}

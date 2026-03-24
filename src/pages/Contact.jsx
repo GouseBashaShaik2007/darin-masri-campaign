@@ -1,3 +1,5 @@
+import { useSearchParams } from 'react-router-dom';
+
 const socialLinks = [
   {
     name: 'Facebook',
@@ -44,6 +46,10 @@ function SocialIcon({ children }) {
 }
 
 export default function Contact() {
+  const [searchParams] = useSearchParams();
+  const reason = searchParams.get('reason');
+  const selectedReason = reason === 'endorsement' ? 'Endorsement' : 'Volunteer';
+
   return (
     <div className="section-padding">
       <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
@@ -131,7 +137,10 @@ export default function Contact() {
               <label className="mb-2 block text-sm font-semibold uppercase tracking-[0.16em] text-primary-900">
                 Reason for contact
               </label>
-              <select className="w-full rounded-2xl border border-primary-100 bg-primary-50/50 px-4 py-4 text-primary-900 outline-none transition focus:border-primary-500">
+              <select
+                defaultValue={selectedReason}
+                className="w-full rounded-2xl border border-primary-100 bg-primary-50/50 px-4 py-4 text-primary-900 outline-none transition focus:border-primary-500"
+              >
                 <option>Volunteer</option>
                 <option>Endorsement</option>
                 <option>Yard Sign</option>
