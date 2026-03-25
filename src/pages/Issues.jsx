@@ -31,7 +31,7 @@ export default function Issues() {
             Priorities for Erie and Pennsylvania Democrats
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-neutral-600">
-            This campaign is centered on reform inside the party and a stronger local voice in
+            This campaign is centered on progress inside the party and a stronger local voice in
             state-level decisions.
           </p>
         </div>

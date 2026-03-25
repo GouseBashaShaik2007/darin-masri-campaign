@@ -45,7 +45,7 @@ export default function Donate() {
           <article className="panel p-8">
             <h2 className="text-2xl font-bold text-primary-900">Build Momentum</h2>
             <p className="mt-4 text-base leading-8 text-neutral-600">
-              Early support helps demonstrate serious backing for reform-minded leadership.
+              Early support helps demonstrate serious backing for progress-minded leadership.
             </p>
           </article>
           <article className="panel p-8">

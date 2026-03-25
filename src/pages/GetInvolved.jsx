@@ -17,7 +17,7 @@ const actions = [
   },
   {
     title: 'Endorse Darin',
-    description: 'Add your name and support to a campaign focused on accountability and reform.',
+    description: 'Add your name and support to a campaign focused on accountability and progress.',
     cta: 'Endorse Darin',
     to: '/contact',
     style: 'btn-accent',
@@ -52,7 +52,7 @@ export default function GetInvolved() {
                 Campaign Strategy
               </p>
               <p className="mt-4 text-base leading-8 text-primary-100/90">
-                This race is aimed at party members and grassroots supporters who want reform,
+                This race is aimed at party members and grassroots supporters who want progress,
                 stronger accountability, and a louder Erie voice in party leadership.
               </p>
             </div>

@@ -26,7 +26,7 @@ export default function Home() {
       <section className="overflow-hidden">
         <div className="section-padding grid items-center gap-12 lg:grid-cols-[1.2fr_0.8fr]">
           <div>
-            <p className="eyebrow mb-4">Erie Democrats for Reform</p>
+            <p className="eyebrow mb-4">Erie Democrats for Progress</p>
             <h1 className="max-w-4xl text-5xl font-bold uppercase leading-[0.92] text-primary-900 md:text-7xl">
               Darin Masri for Pennsylvania Democratic State Committee
             </h1>
@@ -57,7 +57,7 @@ export default function Home() {
                 Campaign Focus
               </p>
               <p className="mt-3 text-base leading-7 text-neutral-600">
-                A focused campaign for party members who want reform, accountability, and a
+                A focused campaign for party members who want progress, accountability, and a
                 stronger Erie voice inside Democratic leadership.
               </p>
             </div>
@@ -107,7 +107,7 @@ export default function Home() {
                 Be part of the movement to bring real change to Erie Democrats.
               </h2>
               <p className="mt-4 text-lg leading-8 text-primary-100/90">
-                This race is about reform, accountability, and making sure local Democrats are
+                This race is about progress, accountability, and making sure local Democrats are
                 heard.
               </p>
             </div>
