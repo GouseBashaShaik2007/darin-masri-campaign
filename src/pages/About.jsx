@@ -1,4 +1,4 @@
-import darinImage from '../assets/darin.jpg';
+import darinImage from '../assets/darin3.png';
 
 export default function About() {
   return (

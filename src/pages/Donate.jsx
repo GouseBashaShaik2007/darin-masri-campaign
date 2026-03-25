@@ -19,8 +19,7 @@ export default function Donate() {
                 ActBlue
               </p>
               <p className="mt-4 text-base leading-8 text-white/90">
-                Use ActBlue for campaign donations. Replace the placeholder link below with the
-                official fundraising page when it is ready.
+                Use ActBlue for campaign donations. It’s a secure, trusted platform that helps us raise the funds we need to win.
               </p>
               <a
                 href="https://actblue.com"
