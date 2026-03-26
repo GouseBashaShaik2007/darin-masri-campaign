@@ -1,12 +1,12 @@
 const updateChannels = [
   {
     name: 'Facebook',
-    href: 'https://www.facebook.com/share/18R6FWj7oy/?mibextid=wwXIfr',
+    disabled: true,
     description: 'Campaign announcements, local events, and supporter updates.',
   },
   {
     name: 'Instagram',
-    href: 'https://www.instagram.com/beinggouse?igsh=ZjF5cm9vMHlzYXY4&utm_source=qr',
+    disabled: true,
     description: 'Photos, campaign moments, and visual updates from the trail.',
   },
 ];
@@ -38,14 +38,9 @@ export default function Updates() {
                 {channel.name}
               </h2>
               <p className="mt-4 text-base leading-8 text-neutral-600">{channel.description}</p>
-              <a
-                href={channel.href}
-                target="_blank"
-                rel="noreferrer"
-                className="btn-primary mt-8"
-              >
-                Open {channel.name}
-              </a>
+              <span className="btn-primary mt-8 inline-flex cursor-default opacity-70">
+                {channel.disabled ? `${channel.name} Coming Soon` : `Open ${channel.name}`}
+              </span>
             </article>
           ))}
         </div>
