@@ -9,8 +9,7 @@ const socialLinks = [
   },
   {
     name: 'Instagram',
-    href: '#',
-    disabled: true,
+    href: 'https://www.instagram.com/darinmasri4erie/',
     icon: (
       <>
         <rect x="3" y="3" width="18" height="18" rx="5" ry="5" />

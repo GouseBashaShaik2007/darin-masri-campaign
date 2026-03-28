@@ -6,7 +6,7 @@ const updateChannels = [
   },
   {
     name: 'Instagram',
-    disabled: true,
+    href: 'https://www.instagram.com/darinmasri4erie/',
     description: 'Photos, campaign moments, and visual updates from the trail.',
   },
 ];
@@ -38,9 +38,20 @@ export default function Updates() {
                 {channel.name}
               </h2>
               <p className="mt-4 text-base leading-8 text-neutral-600">{channel.description}</p>
-              <span className="btn-primary mt-8 inline-flex cursor-default opacity-70">
-                {channel.disabled ? `${channel.name} Coming Soon` : `Open ${channel.name}`}
-              </span>
+              {channel.disabled ? (
+                <span className="btn-primary mt-8 inline-flex cursor-default opacity-70">
+                  {channel.name} Coming Soon
+                </span>
+              ) : (
+                <a
+                  href={channel.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-primary mt-8"
+                >
+                  Open {channel.name}
+                </a>
+              )}
             </article>
           ))}
         </div>

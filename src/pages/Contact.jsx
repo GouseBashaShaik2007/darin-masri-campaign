@@ -14,9 +14,8 @@ const socialLinks = [
   },
   {
     name: 'Instagram',
-    href: '#',
-    label: 'Instagram coming soon',
-    disabled: true,
+    href: 'https://www.instagram.com/darinmasri4erie/',
+    label: 'Campaign Instagram',
     icon: (
       <>
         <rect x="3" y="3" width="18" height="18" rx="5" ry="5" />
