@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import donkeyImage from '../assets/donkey.png';
 
 const navItems = [
-  { to: '/', label: 'Home' },
+  { to: '/', label: 'Home1' },
   { to: '/about', label: 'Meet Darin' },
   { to: '/issues', label: 'Issues' },
   { to: '/get-involved', label: 'Get Involved' },
@@ -59,7 +59,7 @@ export default function Header() {
               {item.label}
             </NavLink>
           ))}
-          <NavLink
+          {/* <NavLink
             to="/donate"
             className={({ isActive }) =>
               `ml-2 rounded-full px-5 py-2.5 text-sm font-bold uppercase tracking-[0.2em] transition ${
@@ -70,7 +70,7 @@ export default function Header() {
             }
           >
             Donate
-          </NavLink>
+          </NavLink> */}
         </nav>
 
         <button
